@@ -14,8 +14,7 @@ class DepthAnalyzer:
     def num_increasing(self, window=1):
         return sum([
             sum(self.depths[i:i+window]) > sum(self.depths[i-1:i-1+window])
-            for i, reading in enumerate(self.depths)
-            if i > 0
+            for i in range(1, len(self.depths))
         ])
 
 
