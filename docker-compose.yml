@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  advent-of-code:
+    build: .
+    volumes:
+      - .:/usr/src/app/
+    command: [ "sh", "-c", "sleep 300d" ]
