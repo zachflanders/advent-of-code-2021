@@ -5,11 +5,8 @@ class DepthAnalyzer:
 
     def __init__(self):
         with open(Path(__file__).parent / 'input.txt', 'r') as f:
-            raw_input = f.read().split('\n')
-        self.depths = list(map(
-            int,
-            raw_input[:-1]
-        ))
+            raw_input = f.read().split('\n')[:-1]
+        self.depths = list(map(int, raw_input))
 
     def num_increasing(self, window=1):
         return sum([

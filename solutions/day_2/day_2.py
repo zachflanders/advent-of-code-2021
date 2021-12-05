@@ -5,11 +5,8 @@ class SubSteerer:
 
     def __init__(self):
         with open(Path(__file__).parent / 'input.txt', 'r') as f:
-            raw_input = f.read().split('\n')
-        self.directions = [
-            direction.split(' ')
-            for direction in raw_input[:-1]
-        ]
+            raw_input = f.read().split('\n')[:-1]
+        self.directions = [direction.split(' ') for direction in raw_input]
 
     def steer_sub(self):
         horizontal = 0
