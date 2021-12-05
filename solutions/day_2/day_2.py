@@ -1,17 +1,14 @@
-import requests
-
-from settings import cookie
+from pathlib import Path
 
 
 class SubSteerer:
 
     def __init__(self):
+        with open(Path(__file__).parent / 'input.txt', 'r') as f:
+            raw_input = f.read().split('\n')
         self.directions = [
             direction.split(' ')
-            for direction in requests.get(
-                'https://adventofcode.com/2021/day/2/input',
-                headers={'cookie': cookie}
-            ).text.split('\n')[:-1]
+            for direction in raw_input[:-1]
         ]
 
     def steer_sub(self):
@@ -47,3 +44,5 @@ if __name__ == '__main__':
     horizontal_2, depth_2, aim_2 = sub_steerer.steer_sub_with_aim()
     print(f'Solution 1: horizontal = {horizontal_1}, depth = {depth_1}, product = {horizontal_1 * depth_1}')
     print(f'Solution 1: horizontal = {horizontal_2}, depth = {depth_2}, aim = {aim_2} product = {horizontal_2 * depth_2}')
+    assert horizontal_1 * depth_1 == 1459206
+    assert horizontal_2 * depth_2 == 1320534480

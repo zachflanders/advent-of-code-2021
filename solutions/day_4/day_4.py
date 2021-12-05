@@ -1,17 +1,14 @@
-import pandas
-import requests
-from collections import OrderedDict
+from pathlib import Path
 
-from settings import cookie
+import pandas
+from collections import OrderedDict
 
 
 class BingoSubsystem:
 
     def __init__(self):
-        raw_input = requests.get(
-            'https://adventofcode.com/2021/day/4/input',
-            headers={'cookie': cookie}
-        ).text.split('\n')[:-1]
+        with open(Path(__file__).parent / 'input.txt', 'r') as f:
+            raw_input = f.read().split('\n')[:-1]
         self.numbers = [int(num) for num in raw_input[0].split(',')]
         self.boards = [
             pandas.concat([
@@ -45,3 +42,5 @@ if __name__ == '__main__':
     solution_1, solution_2 = bs.play()
     print(f'Solution 1 = {solution_1}')
     print(f'Solution 2 = {solution_2}')
+    assert solution_1 == 25410
+    assert solution_2 == 2730

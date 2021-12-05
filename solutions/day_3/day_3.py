@@ -1,18 +1,16 @@
-import pandas
-import requests
+from pathlib import Path
 
-from settings import cookie
+import pandas
 
 
 class BinaryDiagnostic:
 
     def __init__(self):
+        with open(Path(__file__).parent / 'input.txt', 'r') as f:
+            raw_input = f.read().split('\n')
         self.diagnostics = pandas.DataFrame(data=[
             [bit for bit in binary]
-            for binary in requests.get(
-                'https://adventofcode.com/2021/day/3/input',
-                headers={'cookie': cookie}
-            ).text.split('\n')[:-1]
+            for binary in raw_input[:-1]
         ])
 
     @property
@@ -65,3 +63,5 @@ if __name__ == '__main__':
         oxygen generator rating = {bd.o2_gen_rate} \
         co2 scrub rating = {bd.co2_scrub_rate} \
         product = {bd.o2_gen_rate * bd.co2_scrub_rate}')
+    assert bd.gamma_rate * bd.epsilon_rate == 4103154
+    assert bd.o2_gen_rate * bd.co2_scrub_rate == 4245351
